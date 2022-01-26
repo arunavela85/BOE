@@ -1,0 +1,11 @@
+﻿@using dcboe.Models.PageBuilder;
+@addTagHelper *, Kentico.Content.Web.Mvc
+@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+
+@Html.Kentico().PageBuilderStyles()
+
+<div>
+    @await Html.Kentico().EditableAreaAsync("area1")
+</div>
+@Html.Kentico().PageBuilderScripts()

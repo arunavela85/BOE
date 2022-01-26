@@ -1,0 +1,127 @@
+﻿@using dcboe.Models;
+
+@addTagHelper *, Kentico.Content.Web.Mvc
+
+@model IEnumerable<MenuItemViewModel>
+@functions {
+    public string RecursiveSingleMenu(IEnumerable<MenuItemViewModel> items, int parentId, string results)
+    {
+
+
+        foreach (MenuItemViewModel item in items)
+        {
+            if (parentId == item.MenuItemParentID)
+            {
+                results += "<li role='menuitem'>";
+                results += "<div>";
+                results += "<a href='" + item.MenuItemRelativeUrl + "' title='" + item.MenuItemText + "' class='nav-link'>" + item.MenuItemText + "</a>";
+                results += @RecursiveSingleMenu(items, item.MenuItemID, "");
+                results += "</div>";
+                results += "</li>";
+
+            }
+
+        }
+
+        return results;
+    }
+}
+@functions {
+    public string RecursiveMenu(IEnumerable<MenuItemViewModel> items, int parentId, string results)
+    {
+
+        foreach (MenuItemViewModel item in items)
+        {
+            if (parentId == item.MenuItemParentID)
+            {
+                var classname = "";
+                if (item.isHeading)
+                {
+                    classname = "dropdown__link";
+                }
+                results += "<div class='" + classname + "'>";
+                if (item.isHeading)
+                {
+                    results += "<h6>" + item.MenuItemText + "</h6>";
+
+                }
+                else
+                {
+                    results += "<a href='" + item.MenuItemRelativeUrl + "' title='" + item.MenuItemText + "' class='nav-link'>" + item.MenuItemText + "</a>";
+
+                }
+                results += "<ul>";
+                results += "<li role='menuitem'>";
+                results += @RecursiveMenu(items, item.MenuItemID, "");
+                results += "</li>";
+                results += "</ul>";
+                results += "</div>";
+            }
+
+        }
+        return results;
+    }
+}
+@{var classname = "";
+    var role = "";}
+
+@foreach (MenuItemViewModel item in @Model)
+{
+    if (item.menuType == "main")
+    {
+        if (item.IsMegamenu)
+        {
+            classname = "has-dropdown  hover";
+
+        }
+        else
+        {
+            classname = "has-dropdown single-column-menu hover";
+        }
+        role = "";
+    }
+    else
+    {
+        classname = "";
+        role = "menuitem";
+    }
+    if (item.MenuItemGroup == item.menuType)
+    {
+
+<li class="@classname" role="@role">
+    <a href="@item.MenuItemRelativeUrl" title="@item.MenuItemText">
+        @item.MenuItemText
+    </a>
+    @if (item.hasChild)
+    {
+        @if (item.IsMegamenu)
+        {
+
+            <div class='dropdown'>
+                <div class='dropdown__inner'>
+                    <div class='dropdown__links'>
+                        @Html.Raw(@RecursiveMenu(@Model, item.MenuItemID, ""))
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class='dropdown'>
+                <div class='dropdown__inner'>
+                    <div class='dropdown__links'>
+                        <div class="dropdown__link">
+                            <ul>
+                                @Html.Raw(@RecursiveSingleMenu(@Model, item.MenuItemID, ""))
+                            </ul>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</li>
+    }
+
+}

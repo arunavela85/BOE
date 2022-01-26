@@ -1,0 +1,14 @@
+﻿@addTagHelper Kentico.Content.Web.Mvc.WidgetZoneTagHelper, Kentico.Content.Web.Mvc
+
+@using Kentico.PageBuilder.Web.Mvc
+
+@model ComponentViewModel<TextSectionProperties>
+    <widget-zone />
+
+    <div class="intro-small" role="region" style="background-image: url(../images/BlueBG.png);" title="Candidates">
+        <div class="container">
+            <div class="intro__innerBlue">
+                <h1>@Model.Properties.Heading</h1>
+            </div>
+        </div>
+    </div>
