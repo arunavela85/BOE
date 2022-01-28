@@ -23,22 +23,22 @@ namespace dcboe.Components.Widgets.NewsWidget
     public class NewsWidgetViewComponent : ViewComponent
     {
 
-        private readonly IMediaFileUrlRetriever mediaFileUrlRetriever;
 
         public const string IDENTIFIER = "dcboe.Components.Widgets.NewsWidget";
 
 
-        public NewsWidgetViewComponent(IMediaFileUrlRetriever mediaFileUrlRetriever)
+        public NewsWidgetViewComponent()
         {
-            this.mediaFileUrlRetriever = mediaFileUrlRetriever;
         }
 
         [Obsolete]
         public ViewViewComponentResult Invoke(NewsWidgetProperties properties)
         {
-            int totalItems = NewsProvider.GetNews().TotalRecords;
+            string SearchInput = HttpContext.Request.Query["q"];
+            int totalItems = newsProvider.GetNews().Where("NewsTitle",QueryOperator.Like, SearchInput+"%").TotalRecords;
             int pageSize = properties.NewsCount;
             string cpage = HttpContext.Request.Query["page"];
+
             int currentPage = 1;
             int page = 0;
             if (cpage != null)
@@ -46,13 +46,12 @@ namespace dcboe.Components.Widgets.NewsWidget
                 currentPage = int.Parse(cpage);
                 page = currentPage - 1;
             }
-            
+
             int maxPages = 10;
 
-            var pager = new Pager(totalItems, currentPage, pageSize, maxPages );
-
-            IEnumerable<News> newsinfo = NewsProvider.GetNews().Page(page, pageSize);
-
+            var pager = new Pager(totalItems, currentPage, pageSize, maxPages);
+            IEnumerable<News> newsinfo = newsProvider.GetNews().Where("NewsTitle", QueryOperator.Like, SearchInput + "%").Page(page, pageSize);
+            Debug.WriteLine(newsinfo);
 
             // Prepares a collection of view models containing required data of the media files
             IEnumerable<NewsWidgetViewModel> model = newsinfo.Select(
@@ -72,8 +71,8 @@ namespace dcboe.Components.Widgets.NewsWidget
             return View("~/Components/PageBuilder/Widgets/NewsWidget/Default.cshtml", model);
 
         }
-        
-       }
+  
+    }
     }
 
 

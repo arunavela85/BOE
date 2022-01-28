@@ -6,7 +6,7 @@ namespace CMS.DocumentEngine.Types.CMS
 	/// <summary>
 	/// Provides methods for retrieving pages of type News.
 	/// </summary>
-	public partial class NewsProvider
+	public partial class newsProvider
 	{
 		/// <summary>
 		/// Returns a query that selects published pages of type News.

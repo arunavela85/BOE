@@ -1,13 +1,21 @@
-﻿@using dcboe.Components.Widgets.NewsWidget;
+﻿
+@using dcboe.Components.Widgets.NewsWidget;
 @addTagHelper *, Kentico.Content.Web.Mvc
-
+@using Microsoft.AspNetCore.Http.Extensions
 
 @model IEnumerable<NewsWidgetViewModel>
-
-<div class="container">
+<div class="container py-3">
     <div class="row">
         <div class="col-lg-12">
             <div class="article">
+                <h2>Search</h2>
+                <form method="get" name="searchForm" id="searchForm">
+                    <p>
+                        <input type="text" name="q" id="q" value="" />
+                        <input type="submit" value="Search" />
+                    </p>
+                </form>
+
                 @{ int i = 0; }
 
                 @foreach (NewsWidgetViewModel item in Model)
@@ -26,24 +34,26 @@
             <div class="pagination">
                 @foreach (NewsWidgetViewModel item in Model)
                 {
-                   @foreach (int pageNumber in item.pagination)
-                   { 
-                   if (pageNumber == item.currentPage)
-                   {
-                            <a class="page-numbers current"  href="?page=@pageNumber">@pageNumber</a>
-                        }
-                        else
+                    @foreach (int pageNumber in item.pagination)
+                    {
+                        string myPage = "?page=" + @pageNumber;
+                        if (Context.Request.Query["q"].Count > 0)
                         {
-                            <a class="page-numbers"  href="?page=@pageNumber">@pageNumber</a>
-
+                            myPage += "&q=" + @Context.Request.Query["q"];
                         }
 
+                        string className = "";
+                        if (pageNumber == item.currentPage)
+                        {
+                            className = "current";
+                        }
+                        <a class="page-numbers @className" href="@myPage">@pageNumber</a>
                     }
                     break;
                 }
-             
-            </div>
+
             </div>
             </div>
         </div>
     </div>
+</div>

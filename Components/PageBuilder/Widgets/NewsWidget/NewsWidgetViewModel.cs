@@ -17,6 +17,8 @@ namespace dcboe.Components.Widgets.NewsWidget
         public bool EmailToSubscribers { get; set; }
         public int currentPage { get; set; }
         public IEnumerable<int> pagination { get; set; }
+        public string SearchString { get; set; }
 
-}
+
+    }
 }

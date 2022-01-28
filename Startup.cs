@@ -11,8 +11,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace dcboe
 {
+
     public class Startup
     {
+        private const string CONSTRAINT_FOR_NON_ROUTER_PAGE_CONTROLLERS = "NewsWidget";
+
         public IWebHostEnvironment Environment { get; }
 
 
@@ -41,6 +44,7 @@ namespace dcboe
 
             if (Environment.IsDevelopment())
             {
+                services.AddRazorPages().AddRazorRuntimeCompilation();
                 // By default, Xperience sends cookies using SameSite=Lax. If the administration and live site applications
                 // are hosted on separate domains, this ensures cookies are set with SameSite=None and Secure. The configuration
                 // only applies when communicating with the Xperience administration via preview links. Both applications also need 
@@ -82,7 +86,14 @@ namespace dcboe
             app.UseEndpoints(endpoints =>
             {
                 endpoints.Kentico().MapRoutes();
-
+                endpoints.MapControllerRoute(
+                                name: "DefaultWithoutLanguagePrefix",
+                                pattern: "{controller}/{action}/{id}",
+                                constraints: new
+                                {
+                                    controller = CONSTRAINT_FOR_NON_ROUTER_PAGE_CONTROLLERS
+                                }
+                            );
             });
         }
     }
