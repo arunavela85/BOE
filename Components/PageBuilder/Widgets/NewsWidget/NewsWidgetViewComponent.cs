@@ -63,7 +63,13 @@ namespace dcboe.Components.Widgets.NewsWidget
                         NewsTeaser = news.NewsTeaser,
                         NewsReleaseDate = news.NewsReleaseDate,
                         currentPage = int.Parse(cpage != null ? cpage : "1"),
-                        pagination = pager.Pages
+                        pagination = pager.Pages,
+                        ShowPrevious = pager.ShowPrevious,
+                        ShowNext = pager.ShowNext,
+                        ShowPagination = properties.ShowPagination,
+                        ShowSearch = properties.ShowSearch,
+                        ShowButton = properties.ShowButton
+
                     }
             ); ;
 

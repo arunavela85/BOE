@@ -85,5 +85,7 @@ namespace dcboe.Components.Widgets.NewsWidget
         public int StartIndex { get; private set; }
         public int EndIndex { get; private set; }
         public IEnumerable<int> Pages { get; private set; }
+        public bool ShowPrevious => CurrentPage > 1;
+        public bool ShowNext => CurrentPage < TotalPages;
     }
 }

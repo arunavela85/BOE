@@ -18,7 +18,13 @@ namespace dcboe.Components.Widgets.NewsWidget
         public int currentPage { get; set; }
         public IEnumerable<int> pagination { get; set; }
         public string SearchString { get; set; }
+        public bool ShowPrevious { get; set; }
+        public bool ShowNext { get; set; }
 
+       
+        public bool ShowPagination { get; set; }
+        public bool ShowSearch { get; set; }
+        public bool ShowButton { get; set; }
 
     }
 }
