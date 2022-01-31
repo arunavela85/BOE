@@ -26,6 +26,13 @@ using dcboe.Components.FormBuilder.FormSections.TitledSection;
                           IconClass = "icon-square")]
 //EndDocSection:ExampleSection
 //DocSection:ExampleSection
+
+[assembly: RegisterSection("dcboe.Sections.HierarchicalSection",
+                          "Hierarchical section",
+                          typeof(HierarchicalSectionProperties),
+                          customViewName: "~/Components/PageBuilder/Sections/HierarchicalSection/_HierarchicalSection.cshtml",
+                          IconClass = "icon-square")]
+//DocSection:ExampleSection
 [assembly: RegisterSection("dcboe.Sections.TextSection",
                           "Text section",
                           typeof(TextSectionProperties),

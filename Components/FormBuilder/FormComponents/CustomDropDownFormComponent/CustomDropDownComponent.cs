@@ -28,10 +28,9 @@ namespace dcboe.Components.FormBuilder.FormComponents.CustomDropDownFormComponen
             // Perform data retrieval operations here
             // The following example retrieves all pages of the 'DancingGoatMvc.Article' page type 
             // located under the 'Articles' section of the Dancing Goat sample website
-            DocumentQuery query = DocumentHelper.GetDocuments("DancingGoatMvc.Article")
-                                .Path("/Articles/", PathTypeEnum.Children)
+            DocumentQuery query = DocumentHelper.GetDocuments("CMS.MenuItem")
                                 .Columns("DocumentName", "DocumentGUID")
-                                .OnSite("DancingGoatMvc")
+                                .OnSite("dcboe")
                                 .Culture("en-us")
                                 .LatestVersion();
 
@@ -43,7 +42,7 @@ namespace dcboe.Components.FormBuilder.FormComponents.CustomDropDownFormComponen
             {
                 var listItem = new HtmlOptionItem()
                 {
-                    Value = item.Guid,
+                    Value = item.Name,
                     Text = item.Name
                 };
 

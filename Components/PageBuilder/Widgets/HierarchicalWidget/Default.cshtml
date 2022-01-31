@@ -1,0 +1,39 @@
+﻿
+@using dcboe.Components.Widgets.HierarchicalWidget;
+@addTagHelper *, Kentico.Content.Web.Mvc
+@using Microsoft.AspNetCore.Http.Extensions
+
+@model IEnumerable<HierarchicalWidgetViewModel>
+                                <div class="container py-3">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="">
+
+
+                                                @{ int i = 0; }
+                                                <div class="sidebar hidden-xs">
+                                                    <nav class="nav-secondary" role="navigation">
+                                                        <ul role="menubar" aria-hidden="false">
+                                                            @foreach (HierarchicalWidgetViewModel item in Model)
+                                                            {
+                                                                var className = "";
+
+                                                                if (item.MenuItemRelativeUrl ==Context.Request.GetEncodedUrl())
+                                                                {
+                                                                    className = "current";
+                                                                }
+
+                                                        <li role="menuitem" class=@className>
+                                                            <a role="link" href= @item.MenuItemRelativeUrl >@item.MenuName</a>
+                                                        </li>
+                                                        i++;
+
+                                                    }
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>

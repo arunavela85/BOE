@@ -603,3 +603,5 @@ C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.csproj.AssemblyRefe
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.Views.pdb
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.csproj.CopyComplete
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.genruntimeconfig.cache
+C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\Razor\Components\PageBuilder\Sections\HierarchicalSection\_HierarchicalSection.cshtml.g.cs
+C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\Razor\Components\PageBuilder\Widgets\HierarchicalWidget\Default.cshtml.g.cs

@@ -10,6 +10,7 @@
 //--------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 using CMS.Base;
@@ -32,14 +33,19 @@ namespace CMS.DocumentEngine.Types.CMS
 			return DocumentHelper.GetDocuments<MenuItem>().PublishedVersion().Published();
 		}
 
+        internal static IEnumerable<Event> GetMenuItem(string menuName)
+        {
+            throw new NotImplementedException();
+        }
 
-		/// <summary>
-		/// Returns a published page of type MenuItem that matches the specified criteria.
-		/// </summary>
-		/// <param name="nodeId">The identifier of the content tree node that represents the page.</param>
-		/// <param name="siteName">The name of the site where the page belongs.</param>
-		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<MenuItem> GetMenuItem(int nodeId, string cultureName, string siteName)
+
+        /// <summary>
+        /// Returns a published page of type MenuItem that matches the specified criteria.
+        /// </summary>
+        /// <param name="nodeId">The identifier of the content tree node that represents the page.</param>
+        /// <param name="siteName">The name of the site where the page belongs.</param>
+        /// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
+        public static DocumentQuery<MenuItem> GetMenuItem(int nodeId, string cultureName, string siteName)
 		{
 			return GetMenuItems().OnSite(siteName).Culture(cultureName).WhereEquals("NodeID", nodeId);
 		}

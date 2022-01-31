@@ -1,0 +1,27 @@
+﻿@addTagHelper Kentico.Content.Web.Mvc.WidgetZoneTagHelper, Kentico.Content.Web.Mvc
+
+@using Kentico.PageBuilder.Web.Mvc
+
+@model ComponentViewModel<HierarchicalSectionProperties>
+
+<div class="intro-small" role="region" style="background-image: url(../images/BlueBG.png);" title="Candidates">
+    <div class="container">
+        <div class="intro__innerBlue">
+            <h1>@Model.Properties.Heading</h1>
+        </div>
+    </div>
+</div>
+<p></p>
+<p></p>
+<section class="section" role="region">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <widget-zone />
+            </div>
+            <div class="col-lg-9">
+                <widget-zone />
+            </div>
+        </div>
+    </div>
+</section>
