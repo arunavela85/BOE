@@ -5108,21 +5108,22 @@ button.close {
   overflow: hidden;
 }
 .carousel-item {
-  position: relative;
-  display: none;
-  -ms-flex-align: center;
-      -webkit-box-align: center;
-          align-items: center;
-  width: 100%;
-  transition: -webkit-transform 0.6s ease;
-  -webkit-transition: -webkit-transform 0.6s ease;
-  -o-transition: transform 0.6s ease;
-  transition: transform 0.6s ease;
-  transition: transform 0.6s ease, -webkit-transform 0.6s ease;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
+    position: relative;
+    display: none;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    transition: -webkit-transform 0.6s ease;
+    -webkit-transition: -webkit-transform 0.6s ease;
+    -o-transition: transform 0.6s ease;
+    transition: transform 0.6s ease;
+    transition: transform 0.6s ease, -webkit-transform 0.6s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    height:600px;
 }
 .carousel-item.active,
 .carousel-item-next,
@@ -5223,7 +5224,7 @@ button.close {
 .carousel-indicators {
   position: absolute;
   right: 0;
-  bottom: 10px;
+  bottom: 150px;
   left: 0;
   z-index: 15;
   display: -ms-flexbox;
@@ -8773,7 +8774,12 @@ input:-webkit-autofill { -webkit-text-fill-color: inherit; -webkit-box-shadow: 0
 /* ------------------------------------------------------------ *\
 	Thumbs
 \* ------------------------------------------------------------ */
-.thumbs-outter { position: absolute; top: calc(100% - 148px); left: 0; right: 0; }
+.thumbs-outter {
+    position: absolute;
+    top: 440px;
+    left: 0;
+    right: 0;
+}
 .thumbs-outter .thumbs { position: relative; z-index: 1; display: -webkit-box; display: -ms-flexbox; display: flex; max-width: 1110px; margin: 0 auto; border-top: 5px solid #bc0000; -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(#fff)); background: -o-linear-gradient(top, #dedede, #fff); background: linear-gradient(to bottom, #dedede, #fff); pointer-events: visible; }
 .thumb:hover p { color: #000; }
 .thumbs .bordered { border-right: 1px solid #d3d3d3; }
