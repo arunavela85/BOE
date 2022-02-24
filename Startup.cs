@@ -14,7 +14,7 @@ namespace dcboe
 
     public class Startup
     {
-        private const string CONSTRAINT_FOR_NON_ROUTER_PAGE_CONTROLLERS = "NewsWidget";
+        private const string CONSTRAINT_FOR_NON_ROUTER_PAGE_CONTROLLERS = "ElectionDayWorkerWidgetController";
 
         public IWebHostEnvironment Environment { get; }
 

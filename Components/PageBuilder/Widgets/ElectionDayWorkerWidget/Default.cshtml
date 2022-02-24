@@ -1,0 +1,369 @@
+﻿
+@using dcboe.Components.Widgets.ElectionDayWorkerWidget;
+@addTagHelper *, Kentico.Content.Web.Mvc
+@using Microsoft.AspNetCore.Http.Extensions
+
+@model ElectionDayWorkerWidgetViewModel
+
+<script src="~/js/replace-form.js"></script>
+
+<p>
+    <button class="btn btn-primary collapse-ctrl" type="button" data-toggle="collapse" data-target="#requirement" aria-expanded="true" aria-controls="requirement">
+        Eligibility Requirements <i class="ml-2 fa fa-chevron-down"></i>
+    </button>
+</p>
+<div class="dcboeContent mb-3 collapse show" id="requirement" style="">
+    <div class="card card-body">
+        <div>
+            <div style="padding: 5px;">
+                To serve as an election day worker, you are  to be a District resident.
+            </div>
+            <div style="padding: 5px;">
+                <strong>Process</strong><br>
+                You will be selected based upon need. If positions are available, you will be contacted by DCBOE staff prior to the election. Not all applicants are selected to serve and not all applicants selected are assigned to their home polling place.
+            </div>
+            <div style="padding: 5px;">
+                <strong>Work Requirements</strong><br>
+                Election workers must perform the following tasks:<br>
+                <ul class="list-group">
+                    <li>Complete a training class prior to the election (typically about two-four hours in length).</li>
+                    <li>Assist in setting up the polling place for a few hours the day before the election.</li>
+                    <li>Work at the polling place on Election Day from approximately 6 a.m. until 9 p.m.</li>
+                </ul>
+            </div>
+            <div>
+                <strong>For more information</strong><br>
+                <p><span class="sr-only">Poll Worker Hotline</span><i class="fa fa-phone"></i> 202-741-5283</p>
+                <p><span class="sr-only">Poll Worker E-mail</span><i class="fa fa-envelope"></i> electionworker@dcboe.org</p>
+            </div>
+            <div>
+                <strong>DC Board of Elections</strong><br>
+                1015 Half Street, SE, Suite 750<br>
+                Washington, DC 20003<br>
+                Phone: 202-727-2525<br>
+                Fax: 202-347-2648<br>
+                <a href="http://www.dcboe.org" target="_blank">www.dcboe.org</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-antiforgery="true" asp-action="SaveEDW" asp-controller="ElectionDayWorkerWidget" onsubmit="replaceForm(event)">
+    <div id="PnlApplicationForm" class="col-md-12">
+        <div class="alert alert-info">Step 1 of 2: Complete Your Application</div>
+        <p> fields are marked with an asterisk (<span class="req" title="">*</span>).</p>
+        <div class="container">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="Firstname" class="col-form-label"></label>
+                        <input asp-for="Firstname" class="form-control" />
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Middlename" class="col-form-label"></label>
+                        <div>
+                            <input asp-for="Middlename" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Lastname" class="col-form-label"></label>
+                        <input asp-for="Lastname" class="form-control">
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Suffix" class="col-form-label"></label>
+                        <div>
+                            <select asp-for="Suffix" class="form-control">
+                                <option selected="selected" value="">-- Select --</option>
+                                <option value="Jr">Jr</option>
+                                <option value="Sr">Sr</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="DateOfBirth" class="col-form-label"></label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input asp-for="DateOfBirth" class="form-control" />
+                        </div>
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="HomeTelephone" class="col-form-label"></label>
+                        <input asp-for="HomeTelephone"
+                               class="form-control phone-us" placeholder="(xxx) xxx-xxxx">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="BusinessNumber" class="col-form-label"></label>
+                        <input asp-for="BusinessNumber" class="form-control phone-us" placeholder="(xxx) xxx-xxxx">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="CellNumber" class="col-form-label"></label>
+                        <input asp-for="CellNumber" class="form-control phone-us" />
+                        <span asp-validation-for="CellNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="EmailAddress" class="col-form-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="mt-5">
+                <legend>Address Information</legend>
+                <div class="row">
+                    <div class="form-group col-md-8 ">
+                        <label asp-for="StreetAddress" class="col-form-label"></label>
+                        <input asp-for="StreetAddress" class="form-control" />
+                        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="SecondaryAddress" class="col-form-label"></label>
+                        <input asp-for="SecondaryAddress" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group  col-md-4">
+                        <label class="col-form-label" asp-for="City"></label>
+                        <input asp-for="City" class="form-control" readonly="readonly" value="Washington">
+
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label class="col-form-label" asp-for="State"></label>
+                        <input asp-for="State" class="form-control" value="DC" readonly="readonly">
+
+                    </div>
+                    <div class="form-group  col-md-4">
+                        <label asp-for="Zipcode" class="col-form-label"></label>
+                        <input asp-for="Zipcode" class="form-control" />
+
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="mt-5">
+                <legend>Other Information</legend>
+                <div class="row">
+                    <div class="form-group required col-md-12">
+                        <label class="col-form-label">Have you been an election worker before?</label>
+                        <div class="d-flex mx-3">
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="ElectionWorkerBefore" value=true>
+                                <label asp-for="ElectionWorkerBefore" class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="ElectionWorkerBefore" value=false>
+                                <label asp-for="ElectionWorkerBefore" class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="ElectionWorkerBefore" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group required col-md-12">
+                        <label class="col-form-label">Are you a District Government employee?</label>
+                        <div class="d-flex mx-3">
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="IsDistrictGovtEmployee" value=true>
+                                <label asp-for="IsDistrictGovtEmployee" class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="IsDistrictGovtEmployee" value=false>
+                                <label asp-for="IsDistrictGovtEmployee" class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsDistrictGovtEmployee" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group required col-md-12">
+                        <label class="col-form-label">
+                            Are you willing to travel to work outside of your own polling place if
+                            positions are not available there?
+                        </label>
+                        <div class="d-flex mx-3">
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="IsWillingToTravel" value=true>
+                                <label asp-for="IsWillingToTravel" class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" asp-for="IsWillingToTravel" value=false>
+                                <label asp-for="IsWillingToTravel" class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsWillingToTravel" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">
+                            What modes of transportation are you able to use on Election Day?
+                            (Check ALL that apply)
+                        </label>
+                        <div class="d-flex mx-3">
+
+                            @{ var i = 1; }
+                            @foreach (var mt in Model.ModeOfTransportations)
+                            {
+                                <div class="form-check col-2">
+                                    <input class="form-check-input check-transport" type="checkbox" name="ModeOfTransportation" value="@mt" id="ModeOfTransportation_@i" />
+                                    <label for="ModeOfTransportation" class="form-check-label">@mt</label>
+                                </div>
+                                i++;
+                            }
+
+                        </div>
+                        <input name="TransportationOther" type="text" id="TransportationOther" class="form-control"
+                               title="Please specify closest Metro Station"
+                               placeholder="Please specify closest Metro Station" style="display:none">
+
+
+                    </div>
+               
+                <div class="form-group col-md-12">
+                    <label class="col-form-label">
+                        Aside from English, what languages do you speak fluently? (Check ALL
+                        that apply)
+                    </label>
+                    <div class="d-flex mx-3">
+                        @{ var j = 1; }
+                        @foreach (var lan in Model.lang)
+                        {
+                            <div class="form-check col-2">
+                                <input class="form-check-input check-language" type="checkbox" name="Languages" id=@lan@j value="@lan" />
+                                <label for="Languages" class="form-check-label">@lan</label>
+                            </div>
+                            j++;
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        <input name="OtherLanguages" type="text" id="OtherLanguages" class="form-control"
+                               placeholder="Specify if other" title="Please Specify if you choose other languages"
+                               style="display: none;">
+                    </div>
+                </div>
+                <div class="form-group required col-md-12">
+                    <label class="col-form-label">Do you use a computer on a daily basis at home or at work?</label>
+                    <div class="d-flex mx-3">
+                        <div class="form-check col-2">
+                            <input class="form-check-input" type="radio" asp-for="UseComputerOnDailyBasis" value=true>
+                            <label asp-for="UseComputerOnDailyBasis" class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input class="form-check-input" type="radio" asp-for="UseComputerOnDailyBasis" value=false>
+                            <label asp-for="UseComputerOnDailyBasis" class="form-check-label">No</label>
+                        </div>
+                            <span asp-validation-for="UseComputerOnDailyBasis" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="form-group required col-md-12">
+                    <label class="col-form-label">Are you comfortable using a computer keyboard?</label>
+                    <div class="d-flex mx-3">
+                        <div class="form-check col-2">
+                            <input class="form-check-input" type="radio" asp-for="ComfortableUsingKeyboard" value=true>
+                            <label asp-for="ComfortableUsingKeyboard" class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check col-2">
+                            <input class="form-check-input" type="radio" asp-for="ComfortableUsingKeyboard" value=false>
+                            <label asp-for="ComfortableUsingKeyboard" class="form-check-label">No</label>
+                        </div>
+                            <span asp-validation-for="ComfortableUsingKeyboard" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="form-group col-md-12">
+                    <div>
+                        <label class="col-form-label" for="txtOperatingSystem">
+                            If you use a computer, what operating
+                            system are you most comfortable using?
+                        </label>
+                    </div>
+                    <div>
+                        <input name="OperatingSystem" type="text" id="OperatingSystem" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group required col-md-12">
+                    <label class="col-form-label">
+                        Would you prefer a job where you are frequently walking or where you
+                        are mostly sitting?
+                    </label>
+                    <div class="d-flex mx-3">
+                        @foreach (var walk in Model.FrequentlyWalkingOrSittings)
+                        {
+                            <div class="form-check col-2">
+                                <input class="form-check-input" type="radio" name="FrequentlyWalkingOrSitting" value="@walk" />
+                                <label for="FrequentlyWalkingOrSitting" class="form-check-label">@walk</label>
+                            </div>
+                        }
+                    </div>
+                    <span asp-validation-for="FrequentlyWalkingOrSitting" class="text-danger"></span>
+
+                </div>
+                <div class="form-group required col-md-12">
+                    <label class="col-form-label">How did you hear about becoming an election worker?</label>
+                    <div class="d-flex mx-3">
+                        @foreach (var source in Model.ElectionDayWorkerSources)
+                        {
+                            <div class="form-check col-2">
+                                <input class="form-check-input check-source" type="radio" name="ElectionDayWorkerSource" value="@source" />
+                                <label for="ElectionDayWorkerSource" class="form-check-label">@source</label>
+                            </div>
+                        }
+                        </div>
+                                <input name="ElectionDayWorkerSourceOther" type="text" id="ElectionDayWorkerSourceOther"
+                                       class="form-control" title="Please specify if you choose other"
+                                       placeholder="Specify if other" style="display: none;">
+                            
+                        </div>
+        </div>
+        </fieldset>
+        <div class="form-group row my-3">
+            <div class="col-sm-10">
+                <input type="submit" value="Continue" class="class-btn-tabindex btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+    </div>
+</form>
+<script>
+
+    $(document).ready(function () {
+        $(".check-transport").click(function () {
+            var checked = $(this).is(':checked');
+            if (checked && $(this).val() == 'Metro') {
+                $("#TransportationOther").css("display", "");
+            } else {
+                $("#TransportationOther").css("display", "none");
+            }
+        });
+        $(".check-language").click(function () {
+            var checked = $(this).is(':checked');
+            if (checked && $(this).val() == 'Other') {
+                $("#OtherLanguages").css("display", "");
+            } else {
+                $("#OtherLanguages").css("display", "none");
+            }
+        });
+        $(".check-source").click(function () {
+            var checked = $(this).is(':checked');
+            if (checked && $(this).val() == 'Other') {
+                $("#ElectionDayWorkerSourceOther").css("display", "");
+            } else {
+                $("#ElectionDayWorkerSourceOther").css("display", "none");
+            }
+        });
+        $('.phone-us').on('input', function () {
+            let text = $(this).val()
+            text = text.replace(/\D/g, '')
+            if (text.length > 3) text = text.replace(/.{3}/, '($&)-')
+            if (text.length > 9) text = text.replace(/.{9}/, '$&-')
+
+            $(this).val(text);
+        });
+    });
+
+
+</script>

@@ -1,4 +1,6 @@
-﻿using Kentico.Content.Web.Mvc;
+﻿
+
+using Kentico.Content.Web.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -37,7 +39,7 @@ namespace dcboe.Components.Widgets.EventWidget
             IEnumerable<Event> eventsinfo = EventProvider.GetEvents();
             if (properties.ShowButton)
             {
-                eventsinfo = EventProvider.GetEvents().Page(0,5);
+                eventsinfo = EventProvider.GetEvents().Page(0, 5);
 
             }
 
@@ -46,19 +48,20 @@ namespace dcboe.Components.Widgets.EventWidget
                     events => new EventWidgetViewModel
                     {
                         title = events.EventName,
-                        url = events.EventLink,                       
+                        url = events.EventLink,
                         start = events.EventDate,
                         showButton = properties.ShowButton
 
                     }
-            ); 
+            );
 
 
             return View("~/Components/PageBuilder/Widgets/EventWidget/Default.cshtml", model);
 
         }
-  
+
     }
-    }
+}
+
 
 
