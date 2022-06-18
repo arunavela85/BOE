@@ -8,46 +8,41 @@
 <div class="container py-3">
     <div class="row">
         <div class="col-lg-12">
-            <div class="article">
 
-
-                @{ int i = 0; }
-
-                @foreach (EventWidgetViewModel item in Model)
-                {
-                    if (item.showButton)
+            @if (Model.First().showButton)
+            {
+                int i = 0;
+                <ul class="list-events">
+                    @foreach (EventWidgetViewModel item in Model)
                     {
-                        <div class="newsItem" id="readspeaker-content">
-                            <span class="ISI_MESSAGE"></span>
-                            <h6>@item.start</h6>
-                            <a role="link" href=@item.url target="_blank">@item.title </a>
 
-                            <hr>
-                        </div>
+                        <li>
+                            <a role="link" class="list-events__date" href="#">@item.start.ToString("MMM")<br> <strong>@item.start.Day</strong></a>
+
+                            <span><a href=@item.url role="link">@item.title</a></span>
+                        </li>
+
 
                         i++;
+
                     }
 
+                </ul>
+                <a href="/community-outreach/events-calendar" role="button" title="View All Events" class="btn btn--default">View all Events</a>
 
+            }
 
-                }
-                @foreach (EventWidgetViewModel item in Model)
+            @foreach (EventWidgetViewModel item in Model)
+            {
+                if (!item.showButton)
                 {
-                    if (item.showButton)
-                    {
-                        <a href="@Context.Request.GetEncodedUrl()" role="button" title="View All Events" class="btn btn--default">View all News</a>
 
-                    }
-                    else
-                    {
-                        <div id="calendar"></div>
+                 <div id="calendar"></div>
 
-                    }
-                    break;
                 }
+                break;
+            }
 
-
-            </div>
         </div>
     </div>
 </div>

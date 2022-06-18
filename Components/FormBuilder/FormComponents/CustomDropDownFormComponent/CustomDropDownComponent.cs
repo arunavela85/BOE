@@ -29,25 +29,28 @@ namespace dcboe.Components.FormBuilder.FormComponents.CustomDropDownFormComponen
             // The following example retrieves all pages of the 'DancingGoatMvc.Article' page type 
             // located under the 'Articles' section of the Dancing Goat sample website
             DocumentQuery query = DocumentHelper.GetDocuments("CMS.MenuItem")
-                                .Columns("DocumentName", "DocumentGUID")
+                                .Columns("DocumentName", "DocumentGUID","DocumentID")
                                 .OnSite("dcboe")
                                 .Culture("en-us")
                                 .LatestVersion();
+                                
 
             var sampleData = query.ToList().Select(x => new { Name = x.DocumentName,
-                                                                 Guid = x.DocumentGUID.ToString() });
+                                                                 Id = x.DocumentID.ToString() });
 
             // Iterates over retrieved data and transforms it into SelectListItems
             foreach (var item in sampleData)
             {
                 var listItem = new HtmlOptionItem()
                 {
-                    Value = item.Name,
+                    Value = item.Id,
                     Text = item.Name
                 };
 
                 yield return listItem;
             }
+
+
         }
     }
 }

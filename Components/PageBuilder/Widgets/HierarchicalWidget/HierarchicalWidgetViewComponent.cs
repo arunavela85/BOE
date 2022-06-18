@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Kentico.PageBuilder.Web.Mvc;
 using CMS.DocumentEngine.Types.CMS;
 using CMS.DocumentEngine;
+using CMS.DocumentEngine.Routing;
 
 [assembly: RegisterWidget(HierarchicalWidgetViewComponent.IDENTIFIER, typeof(HierarchicalWidgetViewComponent), "Hierarchical Menu", typeof(HierarchicalWidgetProperties), Description = "Hierarchical Listing", IconClass = "icon-badge")]
 
@@ -22,10 +23,7 @@ namespace dcboe.Components.Widgets.HierarchicalWidget
 
     public class HierarchicalWidgetViewComponent : ViewComponent
     {
-
-
         public const string IDENTIFIER = "dcboe.Components.Widgets.HierarchicalWidget";
-
         private readonly IPageRetriever pageRetriever;
         private readonly IPageUrlRetriever pageUrlRetriever;
 
@@ -36,15 +34,30 @@ namespace dcboe.Components.Widgets.HierarchicalWidget
         }
 
         [Obsolete]
-        public ViewViewComponentResult Invoke(HierarchicalWidgetProperties properties)
+        public async Task<ViewViewComponentResult> InvokeAsync(HierarchicalWidgetProperties properties)
         {
-            DocumentQuery query = DocumentHelper.GetDocuments("CMS.MenuItem")
-                               .Path("/"+ properties.menuName + "/", PathTypeEnum.Children)
+
+
+
+            Debug.WriteLine(properties.menuName);
+           
+            /*DocumentQuery query = DocumentHelper.GetDocuments("CMS.MenuItem")
+                                .WithPageUrlPaths()
                                .OnSite("dcboe")
                                .Culture("en-us")
-                               .LatestVersion();
+                               .NestingLevel(properties.subMenu)
+                               .LatestVersion(); */
 
-            var sampleData = query.ToList().Select(x => new {
+            IEnumerable<TreeNode> menuItems = await pageRetriever.RetrieveAsync<TreeNode>(query => query
+                                                   .MenuItems()
+                                                   .NestingLevel(properties.subMenu)
+                                                   .Columns("DocumentName", "DocumentGUID","NodeID", "NodeSiteID")
+                                                   .WithPageUrlPaths()
+                                                   .OnSite(SiteContext.CurrentSiteName)
+                                                    .Path(properties.menuName, PathTypeEnum.Children)
+                                                   .OrderByAscending("NodeOrder"));
+
+            var sampleData = menuItems.Select(x => new {
                 Name = x.DocumentName,
                 Guid = x.DocumentGUID,
                 RelativePath = pageUrlRetriever.Retrieve(x).AbsoluteUrl,

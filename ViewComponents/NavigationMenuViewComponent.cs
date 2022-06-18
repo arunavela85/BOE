@@ -34,6 +34,7 @@ namespace dcboe.ViewComponents
             Debug.WriteLine(menuType);
             IEnumerable<TreeNode> menuItems = new MultiDocumentQuery()                                 
                                   .WithCoupledColumns()
+                                  .OrderBy("NodeLevel, NodeOrder, NodeName")
                                   .LatestVersion();
             Debug.WriteLine(menuItems);
             // Retrieves a collection of page objects with data for the menu (pages of all page types)

@@ -9,9 +9,9 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
-namespace dcboe.Components.Widgets.HierarchicalWidget
+namespace dcboe.Components.Widgets.AccordianWidget
 {
-    public class HierarchicalWidgetProperties : IWidgetProperties
+    public class AccordianWidgetProperties : IWidgetProperties
     {
 
         //DocSection:CustomPropertyConfiguration
@@ -20,7 +20,7 @@ namespace dcboe.Components.Widgets.HierarchicalWidget
         //EndDocSection:CustomPropertyConfiguration
         [EditingComponent(IntInputComponent.IDENTIFIER, Order = 0, Label = "Submenu Level")]
 
-        public int subMenu { get; set; } = 0;
+        public int subMenu { get; set; } = 1;
 
 
     }

@@ -624,3 +624,4 @@ C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.csproj.CopyComplete
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.dll
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.pdb
 C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\dcboe.genruntimeconfig.cache
+C:\inetpub\wwwroot\dcboe\dcboe\obj\Debug\netcoreapp3.1\Razor\Components\PageBuilder\Widgets\AccordianWidget\Default.cshtml.g.cs

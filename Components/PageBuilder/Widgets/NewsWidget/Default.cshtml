@@ -7,29 +7,22 @@
 <div class="container py-3">
     <div class="row">
         <div class="col-lg-12">
-            <div class="article">
+
+            @if (Model.First().ShowSearch)
+            {
+                <div class="searchFilter">
+                    <form method="get" name="searchForm" id="searchForm">
+                        <span class="FilterSearch">
+                            <input type="text" name="q" id="q" value=" @Context.Request.Query["q"]" class="class-tabindex form-control" />
+                            <input type="submit" value="Search" class="class-btn-tabindex btn btn-default" />
+                        </span>
+                    </form>
+                </div>
+                int i = 0;
+
                 @foreach (NewsWidgetViewModel item in Model)
                 {
-                    <div class="searchFilter">
-
-                        @if(item.ShowSearch)
-                        {
-                        <form method="get" name="searchForm" id="searchForm">
-                            <span class="FilterSearch">
-                                <input type="text" name="q" id="q" value=" @Context.Request.Query["q"]" class="class-tabindex form-control" />
-                                <input type="submit" value="Search" class="class-btn-tabindex btn btn-default" />
-                            </span>
-                        </form>
-                        }
-                        
-                    </div>
-                    break;
-                }
-
-                    @{ int i = 0; }
-
-                    @foreach (NewsWidgetViewModel item in Model)
-                    {
+                    <div class="article">
                         <div class="newsItem" id="readspeaker-content">
                             <span class="ISI_MESSAGE"></span>
                             <h6>@item.NewsReleaseDate.Date.ToString("d")</h6>
@@ -37,21 +30,38 @@
 
                             <hr>
                         </div>
+                    </div>
 
-                        i++;
-                   
+                    i++;
 
+
+                }
+            }
+            else if (Model.First().ShowButton)
+            {
+                <ul class="list-news">
+                    @foreach (NewsWidgetViewModel item in Model)
+                    {
+                        <li>
+                            <a href=@item.NewsTeaser role="link">
+                                @item.NewsTitle
+                            </a>
+                        </li>
                     }
+                </ul>
+                <a href="/community-outreach/news" role="button" title="View All News" class="btn btn--default">View all News</a>
+
+            }
+
+
+
 
             <div class="pagination">
 
                 @foreach (NewsWidgetViewModel item in Model)
 
                 {
-                    if (item.ShowButton)
-                    {
-                        <a href="@Context.Request.GetEncodedUrl()" role="button" title="View All News" class="btn btn--default">View all News</a>
-                    }
+
                     @if (item.ShowPagination)
                     {
                         string myPage = "";
@@ -97,7 +107,7 @@
 
             </div>
 
-                </div>
         </div>
+
     </div>
 </div>
